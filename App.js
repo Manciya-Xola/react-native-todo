@@ -1,13 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import Todos from './components/Todos';
 
 export default function App() {
+  const [todos, setTodos] = useState([]);
+  function onAddTodo(text) {
+    setTodos((currentTodo) => {
+      return [...currentTodo, text]
+    })
+  }
   return (
     <View style={styles.appContainer}>
-      <Header/>
-      <Todos/>
+      <Header onAddTodo={onAddTodo}/>
+      <Todos todos={todos}/>
     </View>
   );
 }
